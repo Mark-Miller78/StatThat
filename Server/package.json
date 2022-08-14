@@ -1,15 +1,14 @@
 {
-  "dependencies": {
-    "concurrently": "^7.3.0"
-  },
-  "name": "statthat",
+  "name": "server",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
