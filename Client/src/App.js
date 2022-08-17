@@ -1,7 +1,15 @@
 import logo from './logo.svg';
+import {useEffect} from 'react';
 import './App.css';
 
 function App() {
+
+  useEffect(() =>{
+    fetch('/api/teams')
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">

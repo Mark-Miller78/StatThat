@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 
-app.use("/", routes);
+app.use("/api", routes);
 app.listen(PORT, () => {
     console.log(`Running on: http://localhost:${PORT}`);
 });

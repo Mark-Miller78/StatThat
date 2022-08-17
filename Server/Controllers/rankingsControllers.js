@@ -6,12 +6,12 @@ const getRankings = (req, res) =>{
 
         var year = 2021
 
-        var opts = {
-            'week' : 2,
-            'seasonType' : 'regular'
-        };
+        // var opts = {
+        //     'week' : 1,
+        //     'seasonType' : 'regular'
+        // };
 
-        apiInstance.getRankings(year, opts).then((data, err)=>{
+        apiInstance.getRankings(year).then((data, err)=>{
             if(err){
                 console.log(err);
                 return res.json(err);
