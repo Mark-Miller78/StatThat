@@ -6,7 +6,7 @@ const {Provider} = StoreContext;
 
 const StoreProvider = ({value = [], ...props}) => {
     const [state, dispatch] = useCfbReducer({
-        teams: {},
+        teams : [],
         favTeam : '',
     });
 
@@ -19,3 +19,4 @@ const useStoreContext =()=>{
 }
 
 export {StoreProvider, useStoreContext};
+

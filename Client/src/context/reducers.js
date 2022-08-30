@@ -8,9 +8,11 @@ import { useReducer } from 'react';
 export const reducer = (state, action) => {
     switch (action.type) {
         case GET_TEAMS:
-            return {...state, teams : {...action.products}};
+            return {...state, teams: [...action.teams]};
         case FAV_TEAM:
-            return {...state, favTeam: action.favTeam}
+            return {...state, favTeam: action.favTeam};
+        default:
+            return state;
     }
 }
 
