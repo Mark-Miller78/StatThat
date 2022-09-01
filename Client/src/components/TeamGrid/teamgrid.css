@@ -1,0 +1,6 @@
+.teamsGrid{
+    margin-top: 5vh;
+    width: 70%;
+    height: 50vh;
+    overflow-y: scroll;
+}

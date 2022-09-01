@@ -1,5 +1,8 @@
 import React, {useEffect} from "react";
-import {GET_TEAMS} from '../../context/actions'
+import TeamGrid from "../../components/TeamGrid/teamgrid";
+
+
+import {GET_TEAMS} from '../../context/actions';
 
 import { useStoreContext } from "../../context/globalState";
 
@@ -32,8 +35,15 @@ const HomePage = () =>{
         }
     }, []);
 
+    
     return(
-        'hello world'
+       <div>
+            <div>
+                Welcome to College Football Spot!!!
+            </div>
+
+            <TeamGrid />
+       </div>
     );
 };
 
