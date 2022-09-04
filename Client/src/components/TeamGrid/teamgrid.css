@@ -4,3 +4,14 @@
     height: 50vh;
     overflow-y: scroll;
 }
+
+.searchBar{
+    position: sticky;
+    top: 0px;
+    background-color: gray;
+    opacity: 95%;
+}
+
+.searchBar button{
+    margin-left: 2vw;
+}

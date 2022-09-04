@@ -4,4 +4,10 @@
 
 .teamCard{
     font-weight: bold;
+    font-size: 75%;
+}
+
+.cardHover{
+    transform: scale(1.2);
+    transition: transform .3s;
 }
