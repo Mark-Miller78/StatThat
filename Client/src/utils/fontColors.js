@@ -1,4 +1,4 @@
-const black = ['Colorado', 'Coastal Carolina', 'Iowa State', 'Minnesota', 'Northern Illinois', 'Purdue', 'Southern Mississippi', 'Toledo'];
+const black = ['Colorado', 'Coastal Carolina', 'Iowa State', 'Marshall', 'Minnesota', 'Northern Illinois', 'Purdue', 'Southern Mississippi', 'Toledo'];
 
 const white = ['Arizona', 'Arkansas', 'Bowling Green', 'Georgia Tech', 'Florida', 'Illinois', 'Missouri', 'New Mexico', 'Ole Miss', 'Penn State', 'Pittsburgh', 'UCF', 'West Virginia', 'Vanderbilt']
 
