@@ -30,8 +30,10 @@ const Modal = ({currentTeam, onClose}) => {
         setLastGame(previousGames[previousGames.length - 1]);
         setNextGame (upcomingGames[0])
     }
+    useEffect(() => {
+        fetchGames();
+    }, []);
     
-    fetchGames();
 
     return(
     <div className="modalBackdrop">
