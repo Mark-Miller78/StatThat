@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import GameCard from "../Gamecard/Gamecard";
 import './modal.css';
 
 const Modal = ({currentTeam, onClose}) => {
@@ -40,12 +41,14 @@ const Modal = ({currentTeam, onClose}) => {
             <p>
               {mascot}
             </p>
-            <p>
+            <div>
                 Previous Game
-            </p>
-            <p>
+                {lastGame && <GameCard game = {lastGame}/>}
+            </div>
+            <div>
                 Next Game
-            </p>
+                {nextGame && <GameCard game = {nextGame}/>}
+            </div>
             <button onClick ={onClose} type="button">
             Close this modal
             </button>
