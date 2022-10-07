@@ -1,15 +1,50 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import './modal.css';
 
 const Modal = ({currentTeam, onClose}) => {
     
+    const {conference, division, id, location, logos, mascot, school} = currentTeam;
+
+    const [lastGame, setLastGame] = useState({});
+    const [nextGame, setNextGame] = useState({});
+
+    const fetchGames = async() => {
+        const response = await fetch(`/api/games/${school}`)
+            .then((res) => res.json())
+            .then((data) => getGames(data));
+        
+    }
+    
+    const getGames = (data) =>{
+        const currentTime = new Date();
+
+        const previousGames = data.filter(
+            (game) => new Date(game.startDate) <= currentTime
+        );
+        const upcomingGames = data.filter(
+            (game) => new Date(game.startDate) >=currentTime
+        );
+        
+        setLastGame(previousGames[previousGames.length - 1]);
+        setNextGame (upcomingGames[0])
+    }
+    
+    fetchGames();
+
     return(
     <div className="modalBackdrop">
         <div className="modalContainer">
-            <h3 className="modalTitle"> Hello {currentTeam.school}</h3>
-            <img alt={currentTeam.school} />
+            <h2 className="modalTitle"> {school}</h2>
+            <img alt={school} src={logos[0]}/>
             <p>
-             Hello {currentTeam.mascot}
+              {mascot}
+            </p>
+            <p>
+                Previous Game
+            </p>
+            <p>
+                Next Game
             </p>
             <button onClick ={onClose} type="button">
             Close this modal

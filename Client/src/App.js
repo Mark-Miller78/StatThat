@@ -3,16 +3,24 @@ import Header from './components/Header/Header';
 
 
 import { StoreProvider } from './context/globalState';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+
 import './App.css';
 
 function App() {
 
   return (
     <StoreProvider>
-      <div className="App">
-          <Header />
-          <HomePage />
-      </div>
+      <Router>
+        <div className="App">
+            <Header />
+            <div className='container'>
+              <Routes>
+                <Route path='/' element={<HomePage />} />
+              </Routes>  
+            </div>
+        </div>
+      </Router>
     </StoreProvider>
   );
 }
