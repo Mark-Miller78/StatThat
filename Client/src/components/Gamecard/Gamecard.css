@@ -1,0 +1,12 @@
+.gameCard{
+    background-color: gray;
+    height: 65px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+}
+
+.team{
+    display: flex;
+    justify-content: space-around;
+}
