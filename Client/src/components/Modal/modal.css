@@ -25,3 +25,8 @@
 	font-weight: 600;
 	margin-bottom: 25px;
 }
+
+.scoreBoards{
+	display: flex;
+	justify-content: space-around;
+}

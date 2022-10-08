@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import GameCard from "../Gamecard/Gamecard";
+import GameBets from "../Gamecard/GameBets";
 import './modal.css';
 
 const Modal = ({currentTeam, onClose}) => {
@@ -8,7 +9,7 @@ const Modal = ({currentTeam, onClose}) => {
     const {conference, division, id, location, logos, mascot, school} = currentTeam;
 
     const [lastGame, setLastGame] = useState({});
-    const [nextGame, setNextGame] = useState({});
+    const [bettingLines, setBettingLines] = useState();
 
     const fetchGames = async() => {
         const response = await fetch(`/api/games/${school}`)
@@ -16,7 +17,15 @@ const Modal = ({currentTeam, onClose}) => {
             .then((data) => getGames(data));
         
     }
-    
+
+    const fetchLines = async(game) => {
+        
+        const response =await fetch(`/api/games/betting/${game.id}`)
+            .then((res) => res.json())
+            .then((data) => setBettingLines(data));
+        
+    }
+
     const getGames = (data) =>{
         const currentTime = new Date();
 
@@ -28,10 +37,14 @@ const Modal = ({currentTeam, onClose}) => {
         );
         
         setLastGame(previousGames[previousGames.length - 1]);
-        setNextGame (upcomingGames[0])
+        fetchLines(upcomingGames[0]);
     }
+
+    
+    
     useEffect(() => {
         fetchGames();
+        console.log(bettingLines);
     }, []);
     
 
@@ -43,13 +56,15 @@ const Modal = ({currentTeam, onClose}) => {
             <p>
               {mascot}
             </p>
-            <div>
-                Previous Game
-                {lastGame && <GameCard game = {lastGame}/>}
-            </div>
-            <div>
-                Next Game
-                {nextGame && <GameCard game = {nextGame}/>}
+            <div className="scoreBoards">
+                <div>
+                    Previous Game
+                    {lastGame && <GameCard game = {lastGame}/>}
+                </div>
+                <div>
+                    Next Game
+                    {bettingLines && <GameBets  bets= {bettingLines}/>}
+                </div>
             </div>
             <button onClick ={onClose} type="button">
             Close this modal
