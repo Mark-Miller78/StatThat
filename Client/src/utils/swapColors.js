@@ -1,9 +1,4 @@
-const swaps = ['Air Force', 'Arizona', 'cincinnati', 'Clemson', 'Iowa', 'LSU', 'Michigan State', 'Nevada', 'Rice', 'San Diego State', 'TCU', 'Temple', 'Tulsa'];
+const colorSwaps = ['Air Force', 'California','Cincinnati', 'Clemson', 'Florida International', 'Iowa', 'Liberty', 'LSU', 'Louisiana Monroe',  'Michigan State', 
+                    'Nevada', 'Ohio State', 'Rice', 'San Diego State', 'South Alabama', 'TCU', 'Temple', 'Tulsa', 'Western Michigan'];
 
-const swapColors = (team)=>{
-    if(swaps.includes(team)){
-        return true;
-    }
-};
-
-export default fontColor;
+export default colorSwaps;

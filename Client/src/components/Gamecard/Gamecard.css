@@ -8,5 +8,11 @@
 
 .team{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    border: 1px solid black;
+    background-color: gray;
+}
+
+.team img{
+    height: 20px;
 }
