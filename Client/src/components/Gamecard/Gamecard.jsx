@@ -14,14 +14,22 @@ const GameCard =({game})=>{
    
     return(
         <div className="gameCard">
-            <div className="team">
-                <p><img src={home.logos[0]}/> {home.abbreviation}</p>
-                <p>{homePoints}</p>
-            </div>
-            <div className="team">
-                <p><img src={away.logos[0]}/> {away.abbreviation}</p>
-                <p>{awayPoints}</p>
-            </div>
+           <ul className="competitors">
+                <li className="team">
+                    <img className="logos" src={home.logos[0]}/> 
+                    <div className="team_score">
+                        <div className="school">{home.abbreviation}</div>
+                        <div className="score">{homePoints}</div>
+                    </div>
+                </li>
+                <li className="team">
+                    <img className="logos" src={away.logos[0]}/> 
+                    <div className="team_score">
+                        <div className="school">{away.abbreviation}</div>
+                        <div className="score">{awayPoints}</div>
+                    </div>
+                </li>
+           </ul>
         </div>
     )
 }

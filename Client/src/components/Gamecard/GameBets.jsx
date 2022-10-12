@@ -17,14 +17,22 @@ const GameBets =({bets})=>{
     const favoredTeam = lines.length? lines[0].formattedSpread.split(' ') : '';
     return(
         <div className="gameCard">
-            <div className="team">
-                <p><img src={home.logos[0]}/> {home.abbreviation}</p>
-                {lines.length? <p>{ homeTeam === favoredTeam[0] ? favoredTeam[1] : lines[0].overUnder}</p> : ''}
-            </div>
-            <div className="team">
-                <p> <img src={away.logos[0]}/> {away.abbreviation}</p>
-                {lines.length? <p>{ awayTeam === favoredTeam[0] ? favoredTeam[1] : 'O/U:' + lines[0].overUnder}</p> : ''}
-            </div>
+            <ul className="competitors">
+                <li className="team">
+                    <img className="logos" src={home.logos[0]}/>
+                    <div className="team_score">
+                        <div className="school">{home.abbreviation}</div>
+                        {lines.length? <div className="lines">{ homeTeam === favoredTeam[0] ? favoredTeam[1] : 'O/U ' + lines[0].overUnder}</div> : ''}
+                    </div>
+                </li>
+                <li className="team">
+                    <img className="logos" src={away.logos[0]}/>
+                    <div className="team_score">
+                        <div className="school">{away.abbreviation}</div>
+                        {lines.length? <div className="lines">{ awayTeam === favoredTeam[0] ? favoredTeam[1] : 'O/U:' + lines[0].overUnder}</div> : ''}
+                    </div>
+                </li>
+            </ul>
         </div>
     )
 }
