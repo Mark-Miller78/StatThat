@@ -12,7 +12,6 @@ import './modal.css';
 const Modal = ({currentTeam, onClose}) => {
     
     const {conference, division, id, location, logos, mascot, school, color, altColor} = currentTeam;
-    console.log(currentTeam);
 
     const [lastGame, setLastGame] = useState();
     const [bettingLines, setBettingLines] = useState();

@@ -14,6 +14,7 @@ const GameCard =({game})=>{
    
     return(
         <div className="gameCard">
+            <div className="status">Final</div>
            <ul className="competitors">
                 <li className="team">
                     <img className="logos" src={home.logos[0]}/> 
