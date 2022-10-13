@@ -1,12 +1,55 @@
 .gameCard{
     background-color: gray;
-    height: 65px;
-    width: 120px;
+    height: 70px;
+    width: 135px;
     display: flex;
     flex-direction: column;
+    padding-left: 5px;
+}
+
+.status{
+    font-size: 13px;
+    align-self: flex-start;
+}
+
+.competitors{
+    list-style: none;
+    padding-left: 0%;
+    position: relative;
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.logos{
+    height: 18px;
+    padding-right: 5px;
 }
 
 .team{
     display: flex;
-    justify-content: space-around;
+    height: 50%;
+    align-items: center;
+    font-size: 12px;
+}
+
+.team_score{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.score{
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.lines{
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.OU{
+    font-size: 10px;
 }

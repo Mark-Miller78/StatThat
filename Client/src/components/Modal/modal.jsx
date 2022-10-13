@@ -1,15 +1,25 @@
 import React from "react";
 import { useEffect, useState } from "react";
+
 import GameCard from "../Gamecard/Gamecard";
 import GameBets from "../Gamecard/GameBets";
+
+import colorSwaps from "../../utils/swapColors";
+import fontColors from "../../utils/fontColors";
+
 import './modal.css';
 
 const Modal = ({currentTeam, onClose}) => {
     
-    const {conference, division, id, location, logos, mascot, school} = currentTeam;
+    const {conference, division, id, location, logos, mascot, school, color, altColor} = currentTeam;
 
-    const [lastGame, setLastGame] = useState({});
+    const [lastGame, setLastGame] = useState();
     const [bettingLines, setBettingLines] = useState();
+
+    const teamColors = {
+        color: colorSwaps.includes(school)? color : fontColors(school) || altColor, 
+        backgroundColor:  colorSwaps.includes(school)? altColor : color,
+    };
 
     const fetchGames = async() => {
         const response = await fetch(`/api/games/${school}`)
@@ -44,18 +54,21 @@ const Modal = ({currentTeam, onClose}) => {
     
     useEffect(() => {
         fetchGames();
-        console.log(bettingLines);
-    }, []);
+    },[]);
     
 
     return(
     <div className="modalBackdrop">
-        <div className="modalContainer">
-            <h2 className="modalTitle"> {school}</h2>
-            <img alt={school} src={logos[0]}/>
-            <p>
-              {mascot}
-            </p>
+        <div className="modalContainer" 
+             style={teamColors}>
+            <h2 className="modalTitle"> {school} {mascot}
+                <img alt={school} src={logos[0]}/>
+            </h2>
+            <div className="teamInfo">
+                <p>Conference: {conference}  <br></br> {division ? `Division: ${division}` : ''}</p>
+                <p>Stadium: {location.name}</p>
+                <p>{location.city}, {location.state}</p>
+            </div>
             <div className="scoreBoards">
                 <div>
                     Previous Game
@@ -66,9 +79,17 @@ const Modal = ({currentTeam, onClose}) => {
                     {bettingLines && <GameBets  bets= {bettingLines}/>}
                 </div>
             </div>
-            <button onClick ={onClose} type="button">
-            Close this modal
-            </button>
+            <div className="selection">
+                Select {school} {mascot} as your team?
+                <div className="buttons">
+                    <button>
+                        Select Team
+                    </button>
+                    <button onClick ={onClose} type="button">
+                        Cancel
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     );

@@ -12,21 +12,39 @@
 }
 
 .modalContainer {
-	background: var(--darker);
 	border-radius: 5px;
-	max-width: 100%;
-	margin: 50px auto;
+	max-width: 75%;
+	margin: 20vh auto;
 	padding: 15px;
-	width: 960px;
+	width: 500px;
 }
 
 .modalTitle {
-	font-size: 18px;
-	font-weight: 600;
+	font-size: 25px;
+	font-weight: 700;
 	margin-bottom: 25px;
+}
+
+.modalTitle img{
+	height: 75px;
+	margin-left: 10px;
+}
+
+.teamInfo{
+	font-size: 18px;
+	font-weight: 500;
 }
 
 .scoreBoards{
 	display: flex;
 	justify-content: space-around;
+}
+
+.selection{
+	margin-top: 20px;
+}
+.buttons{
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 10px;
 }

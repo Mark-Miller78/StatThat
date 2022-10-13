@@ -15,21 +15,6 @@ code {
 .page{
   background-color: white;
   width: 80%;
+  height: 100%;
   display: inline-block;
 }
-
-/* .page::after, .page::before{
-  content: 'Hello World';
-  background-color: aliceblue;
-  position: absolute;
-  transform: rotate(-90deg);
-  height: 10%;
-}
-
-.page::after{
-  right: 0px;
-}
-
-.page::before{
-  left: 0%;
-} */
