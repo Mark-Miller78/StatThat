@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import GameCard from "../Gamecard/Gamecard";
 import GameBets from "../Gamecard/GameBets";
 
+import { useStoreContext } from "../../context/globalState";
+import { FAV_TEAM } from "../../context/actions";
+
+import {useNavigate} from 'react-router-dom';
+
 import colorSwaps from "../../utils/swapColors";
 import fontColors from "../../utils/fontColors";
 
@@ -16,6 +21,9 @@ const Modal = ({currentTeam, onClose}) => {
     const [lastGame, setLastGame] = useState();
     const [bettingLines, setBettingLines] = useState();
 
+    const [state, dispatch] = useStoreContext();
+    const navigate = useNavigate();
+
     const teamColors = {
         color: colorSwaps.includes(school)? color : fontColors(school) || altColor, 
         backgroundColor:  colorSwaps.includes(school)? altColor : color,
@@ -24,7 +32,8 @@ const Modal = ({currentTeam, onClose}) => {
     const fetchGames = async() => {
         const response = await fetch(`/api/games/${school}`)
             .then((res) => res.json())
-            .then((data) => getGames(data));
+            .then((data) => getGames(data))
+            .catch((err)=>console.log(err));
         
     }
 
@@ -32,7 +41,8 @@ const Modal = ({currentTeam, onClose}) => {
         
         const response =await fetch(`/api/games/betting/${game.id}`)
             .then((res) => res.json())
-            .then((data) => setBettingLines(data));
+            .then((data) => setBettingLines(data))
+            .catch((err)=>console.log(err));
         
     }
 
@@ -48,6 +58,19 @@ const Modal = ({currentTeam, onClose}) => {
         
         setLastGame(previousGames[previousGames.length - 1]);
         fetchLines(upcomingGames[0]);
+    }
+
+    const setFavTeam = () => {
+        const teamName = school.split(' ').join('');
+
+        dispatch({
+            type: FAV_TEAM,
+            favTeam: teamName
+        });
+
+        localStorage.setItem('favoriteTeam', JSON.stringify(teamName));
+
+        return navigate(`/teams/${teamName}/${id}`);
     }
 
     
@@ -82,7 +105,7 @@ const Modal = ({currentTeam, onClose}) => {
             <div className="selection">
                 Select {school} {mascot} as your team?
                 <div className="buttons">
-                    <button>
+                    <button onClick={setFavTeam}>
                         Select Team
                     </button>
                     <button onClick ={onClose} type="button">
