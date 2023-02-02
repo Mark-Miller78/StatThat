@@ -30,11 +30,26 @@ const Modal = ({currentTeam, onClose}) => {
     };
 
     const fetchGames = async() => {
-        const response = await fetch(`/api/games/${school}`)
-            .then((res) => res.json())
-            .then((data) => getGames(data))
-            .catch((err)=>console.log(err));
-        
+        // const response = await fetch(`/api/games/${school}`)
+        //     .then((res) => res.json())
+        //     .then((data) => getGames(data))
+        //     .catch((err)=>console.log(err));
+        let urls = [`/api/games/${school}`, `/api/gamesPost/${school}`];
+        // let response = [];
+
+        // await Promise.all(urls.map( async url =>{
+        //     fetch(url)
+        //     .then((res) => res.json())
+        //     .then((data) => response.push(data))
+        //     .then((games) => getGames(games))
+        //     .catch((err) => console.log(err));
+        // } ))
+
+        let promises = urls.map(url => fetch(url).then((res) => res.json()));
+        await Promise.all(promises)
+            .then(bodies => getGames(bodies))
+            .catch((err) => console.log(err));
+                
     }
 
     const fetchLines = async(game) => {
@@ -47,17 +62,19 @@ const Modal = ({currentTeam, onClose}) => {
     }
 
     const getGames = (data) =>{
+       
+        let games = data.flat();
         const currentTime = new Date();
 
-        const previousGames = data.filter(
+        const previousGames = games.filter(
             (game) => new Date(game.startDate) <= currentTime
         );
-        const upcomingGames = data.filter(
+        const upcomingGames = games.filter(
             (game) => new Date(game.startDate) >=currentTime
         );
         
-        setLastGame(previousGames[previousGames.length - 1]);
-        fetchLines(upcomingGames[0]);
+        previousGames.length > 0 && setLastGame(previousGames[previousGames.length - 1]);
+        upcomingGames.length > 0 && fetchLines(upcomingGames[0]);
     }
 
     const setFavTeam = () => {
