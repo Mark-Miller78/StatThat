@@ -14,9 +14,9 @@ const Schedule = ({gameList, college}) =>{
     const results = (x, y) => {
         let results;
         if(x.homeTeam === y){
-            results = x.homePoints > x.awayPoints ? `W ${x.homePoints}-${x.awayPoints}` : `L ${x.awayPoints}-${x.homePoints}`;
+            results = x.homePoints > x.awayPoints ? <span className="results scheduleSpan"><span className="win">W</span> {x.homePoints}-{x.awayPoints}</span> : <span className="results scheduleSpan"><span className="loss">L</span> {x.awayPoints}-{x.homePoints}</span>;
         } else {
-            results = x.awayPoints > x.homePoints ? `W ${x.awayPoints}-${x.homePoints}` : `L ${x.homePoints}-${x.awayPoints}`;
+            results = x.homePoints < x.awayPoints ? <span className="results scheduleSpan"><span className="win">W</span> {x.awayPoints}-{x.homePoints}</span> : <span className="results scheduleSpan"><span className="loss">L</span> {x.homePoints}-{x.awayPoints}</span>;
         }
         return results;
     }
@@ -24,9 +24,9 @@ const Schedule = ({gameList, college}) =>{
     const previousGames = schedule.filter(
             (game) => new Date(game.startDate) <= currentTime
         ).map(game =>
-            <li key={game.id}>
-                <span className="date">{scheduleDateFormat(game.startDate)}</span>&nbsp;
-                {game.homeTeam === college ? 'Vs. ' + game.awayTeam : '@ ' + game.homeTeam }&nbsp;
+            <li key={game.id} className ='scheduleListItem'>
+                <span className="date scheduleSpan">{scheduleDateFormat(game.startDate)}</span>&nbsp;
+                <span className="team scheduleSpan">{game.homeTeam === college ? 'Vs. ' + game.awayTeam : '@ ' + game.homeTeam }</span>&nbsp;
                 {results(game, college)}
             </li>
             );
@@ -36,7 +36,7 @@ const Schedule = ({gameList, college}) =>{
 
     return(
         <div>
-            <ul>
+            <ul className="scheduleList">
                 {previousGames}
             </ul>
         </div>

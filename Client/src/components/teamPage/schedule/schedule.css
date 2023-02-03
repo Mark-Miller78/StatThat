@@ -1,0 +1,33 @@
+.scheduleSpan{
+    display: inline-block;
+    white-space: nowrap;
+    font: .8em sans-serif;
+}
+
+.scheduleListItem{
+    background-color: white;
+    border: 1px solid black;
+    text-align: left;
+    width:auto;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scheduleList{
+    width: 300px;
+    background-color: white;
+    list-style-type: none;
+    padding: 0px
+}
+
+.win{
+    color: green;
+    font-weight: 700;
+}
+
+.loss{
+    color: red;
+    font-weight: 700;
+}
