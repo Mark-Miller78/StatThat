@@ -24,8 +24,22 @@ const TeamPage = () => {
             .catch((err) => console.log(err));        
     };
 
+    const fetchstats = async () =>{
+        const response = await fetch(`/api/teamStats/${school}`,{
+            headers: {
+                'Content-Type' : 'application/json',
+                'Accept' : 'application/json'
+            }
+        })
+                .then((res) => res.json())
+                .then((stats) => console.log(stats))
+                .catch((err) => console.log(err));
+        
+    };
+
     useEffect(() => {
         fetchGames();
+       fetchstats();
     },[]);
     
     
