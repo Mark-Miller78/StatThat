@@ -9,7 +9,6 @@ import './schedule.css'
 const Schedule = ({gameList, college}) =>{
     const schedule = gameList.flat();
     const currentTime = new Date();
-    console.log(schedule);
 
     const results = (x, y) => {
         let results;

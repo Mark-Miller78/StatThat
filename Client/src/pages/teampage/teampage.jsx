@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useStoreContext } from "../../context/globalState";
 
 import Schedule from "../../components/teamPage/schedule/schedule";
+import StatsLeaders from "../../components/teamPage/playerStats/playerStats";
 
 const TeamPage = () => {
     const {teamId} = useParams();
@@ -11,6 +12,9 @@ const TeamPage = () => {
 
     const {teams} = state;
     const [schedule, setSchedule] = useState([]);
+    const [rushingStats, setRushingStats] = useState([]);
+    const [passingStats, setPassingStats] = useState([]);
+    const [receivingStats, setReceivingStats] = useState([]);
 
     const currentTeam = teams.find(team => team.id == teamId);
     const {conference, division, id, location, logos, mascot, school, color, altColor} = currentTeam;
@@ -25,16 +29,16 @@ const TeamPage = () => {
     };
 
     const fetchstats = async () =>{
-        const response = await fetch(`/api/teamStats/${school}`,{
-            headers: {
-                'Content-Type' : 'application/json',
-                'Accept' : 'application/json'
-            }
+       let urls = [`/api/playerStats/${school}/passing`, `/api/playerStats/${school}/rushing`, `/api/playerStats/${school}/receiving`];
+
+       let promises = urls.map(url => fetch(url).then((res)=> res.json()));
+       await Promise.all(promises)
+        .then((bodies) => {
+            setPassingStats(bodies[0]);
+            setRushingStats(bodies[1]);
+            setReceivingStats(bodies[2]);
         })
-                .then((res) => res.json())
-                .then((stats) => console.log(stats))
-                .catch((err) => console.log(err));
-        
+        .catch((err) => console.log(err));
     };
 
     useEffect(() => {
@@ -47,6 +51,7 @@ const TeamPage = () => {
         <div>
             <p>{currentTeam.school}</p>
             <div>{schedule && <Schedule gameList = {schedule} college = {school}/>}</div>
+            <div><StatsLeaders passing = {passingStats} rushing={rushingStats} receiving={receivingStats}/></div>
         </div>
     )
 }
