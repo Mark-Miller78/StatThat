@@ -8,6 +8,7 @@ const StoreProvider = ({value = [], ...props}) => {
     const [state, dispatch] = useCfbReducer({
         teams : [],
         favTeam : '',
+        roster : [],
     });
 
     console.log(state);

@@ -1,6 +1,7 @@
 import {
     GET_TEAMS,
-    FAV_TEAM
+    FAV_TEAM,
+    TEAM_ROSTER
 } from './actions';
 
 import { useReducer } from 'react';
@@ -11,6 +12,8 @@ export const reducer = (state, action) => {
             return {...state, teams: [...action.teams]};
         case FAV_TEAM:
             return {...state, favTeam: action.favTeam};
+        case TEAM_ROSTER:
+            return {...state, roster: [...action.roster]};
         default:
             return state;
     }
