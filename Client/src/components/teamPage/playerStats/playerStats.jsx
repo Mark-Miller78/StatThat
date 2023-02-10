@@ -1,15 +1,15 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStoreContext } from "../../../context/globalState";
 
 const StatsLeaders =({passing, rushing, receiving})=>{
+    const [stats, setStats] = useState([]);
+
     let [state] = useStoreContext();
     let {roster} = state;
 
-    let statsArr = [];
-
-    let prepareStatsLeaders = async (data) => {
-        let obj = await data.filter(x => x.statType === 'YDS').sort((a,b)=>{
+    let prepareStatsLeaders = (data) => {
+        let obj = data.filter(x => x.statType === 'YDS').sort((a,b)=>{
             return b.stat - a.stat
         })[0]
 
@@ -19,26 +19,23 @@ const StatsLeaders =({passing, rushing, receiving})=>{
         leader.category = obj.category;
         leader.tds = data.filter(x => x.statType === 'TD' && x.playerId === obj.playerId)[0].stat;
 
-        statsArr.push(leader);
+        return leader;
     }
 
-    prepareStatsLeaders(passing);
-    prepareStatsLeaders(rushing);
-    prepareStatsLeaders(receiving);
 
-    console.log(statsArr);
+   let statsArr = [prepareStatsLeaders(passing), prepareStatsLeaders(rushing), prepareStatsLeaders(receiving)];
+   
+    
+    
+    console.log(stats);
 
-    // let passingLeader = passing.filter(x => x.statType === 'YDS').sort((a,b)=>{
-    //     return b.stat - a.stat
-    // })[0];
+    const statsList = statsArr.map(player =>
+            <li key={player.id} className='list-group-item'>
+                <p>{player.firstName}  {player.lastName}</p>
+            </li>
+        );
 
-    // let rushingLeader = rushing.filter(x => x.statType === 'YDS').sort((a,b)=>{
-    //     return b.stat - a.stat
-    // })[0];
-
-    // let receivingLeader = receiving.filter(x => x.statType === 'YDS').sort((a,b)=>{
-    //     return b.stat - a.stat
-    // })[0];
+    
 
 
     return(
@@ -47,7 +44,9 @@ const StatsLeaders =({passing, rushing, receiving})=>{
                 <p>Team Leaders</p>
             </div>
             <div className="card-body container">
-
+                <ul className="list-group">
+                    {statsList}
+                </ul>
             </div>
         </div>
     );
