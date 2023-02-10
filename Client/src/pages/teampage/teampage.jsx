@@ -14,9 +14,9 @@ const TeamPage = () => {
 
     const {teams} = state;
     const [schedule, setSchedule] = useState([]);
-    const [rushingStats, setRushingStats] = useState([]);
-    const [passingStats, setPassingStats] = useState([]);
-    const [receivingStats, setReceivingStats] = useState([]);
+    const [rushingStats, setRushingStats] = useState();
+    const [passingStats, setPassingStats] = useState();
+    const [receivingStats, setReceivingStats] = useState();
 
     const currentTeam = teams.find(team => team.id == teamId);
     const {school} = currentTeam;
@@ -59,7 +59,7 @@ const TeamPage = () => {
         <div>
             <p>{currentTeam.school}</p>
             <div>{schedule && <Schedule gameList = {schedule} college = {school}/>}</div>
-            <div><StatsLeaders passing = {passingStats} rushing={rushingStats} receiving={receivingStats}/></div>
+            <div>{passingStats && rushingStats && receivingStats && <StatsLeaders passing = {passingStats} rushing={rushingStats} receiving={receivingStats}/>}</div>
         </div>
     )
 }

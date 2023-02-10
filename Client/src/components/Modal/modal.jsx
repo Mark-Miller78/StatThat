@@ -29,15 +29,15 @@ const Modal = ({currentTeam, onClose}) => {
         backgroundColor:  colorSwaps.includes(school)? altColor : color,
     };
 
-    const fetchGames = async() => {
-        let urls = [`/api/games/${school}`, `/api/gamesPost/${school}`];
+    // const fetchGames = async() => {
+    //     let urls = [`/api/games/${school}`, `/api/gamesPost/${school}`];
         
-        let promises = urls.map(url => fetch(url).then((res) => res.json()));
-        await Promise.all(promises)
-            .then(bodies => getGames(bodies))
-            .catch((err) => console.log(err));
+    //     let promises = urls.map(url => fetch(url).then((res) => res.json()));
+    //     await Promise.all(promises)
+    //         .then(bodies => getGames(bodies))
+    //         .catch((err) => console.log(err));
                 
-    }
+    // }
 
     const fetchLines = async(game) => {
         
@@ -80,6 +80,16 @@ const Modal = ({currentTeam, onClose}) => {
     
     
     useEffect(() => {
+        const fetchGames = async() => {
+            let urls = [`/api/games/${school}`, `/api/gamesPost/${school}`];
+            
+            let promises = urls.map(url => fetch(url).then((res) => res.json()));
+            await Promise.all(promises)
+                .then(bodies => getGames(bodies))
+                .catch((err) => console.log(err));
+                    
+        }
+
         fetchGames();
     },[]);
     
